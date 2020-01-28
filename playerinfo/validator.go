@@ -14,6 +14,8 @@ import (
 	"github.com/cpurta/go-ati-client/util"
 )
 
+// NewValidator returns an interface that is able to validate a player and their
+// PIN by sending a POST request to the PlayerInfo resource of the ATI REST service.
 func NewValidator(config *config.Config, httpClient *http.Client) Validator {
 	return &defaultValidator{
 		baseClient: &util.BaseClient{
@@ -25,6 +27,7 @@ func NewValidator(config *config.Config, httpClient *http.Client) Validator {
 
 var _ Validator = &defaultValidator{}
 
+// Validator allows for validating a players PIN.
 type Validator interface {
 	Validate(playerID int, pin string, ctx context.Context) error
 }
@@ -42,6 +45,9 @@ type playerPIN struct {
 	PinNumber string `json:"PinNumber"`
 }
 
+// Validate will send a POST request to the configured ATI REST service that will
+// determine if the players PIN is valid. If the response returns anything other
+// than HTTP 200 it will return an error stating that the players PIN in invalid.
 func (validator *defaultValidator) Validate(playerID int, pin string, ctx context.Context) error {
 	var (
 		err error
