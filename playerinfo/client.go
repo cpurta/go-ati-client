@@ -10,6 +10,7 @@ import (
 func NewClient(config *config.Config, httpClient *http.Client) *Client {
 	return &Client{
 		Validator: NewValidator(config, httpClient),
+		Getter:    NewGetter(config, httpClient),
 	}
 }
 
