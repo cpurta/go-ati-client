@@ -17,4 +17,5 @@ func NewClient(config *config.Config, httpClient *http.Client) *Client {
 // ATI REST service.
 type Client struct {
 	Validator
+	Getter
 }
