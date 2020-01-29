@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package playerinfo
+package accounts
 
 import (
 	"net/http"
@@ -21,17 +21,12 @@ import (
 	"github.com/cpurta/go-ati-client/config"
 )
 
-// NewClient returns a client that has access to player infomation.
 func NewClient(config *config.Config, httpClient *http.Client) *Client {
 	return &Client{
-		Validator: NewValidator(config, httpClient),
-		Getter:    NewGetter(config, httpClient),
+		Getter: NewGetter(config, httpClient),
 	}
 }
 
-// Client allows for operations to be performed on the PlayerInfo resource of an
-// ATI REST service.
 type Client struct {
-	Validator
 	Getter
 }

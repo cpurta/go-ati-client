@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package playerinfo
+package accounts
 
 import (
 	"context"
@@ -36,7 +36,7 @@ func NewGetter(config *config.Config, httpClient *http.Client) Getter {
 }
 
 type Getter interface {
-	Get(playerID int, ctx context.Context) (*PlayerInfo, error)
+	Get(playerID int, ctx context.Context) (*PlayerAccount, error)
 }
 
 var _ Getter = &defaultGetter{}
@@ -45,14 +45,14 @@ type defaultGetter struct {
 	baseClient *util.BaseClient
 }
 
-func (getter *defaultGetter) Get(playerID int, ctx context.Context) (*PlayerInfo, error) {
+func (getter *defaultGetter) Get(playerID int, ctx context.Context) (*PlayerAccount, error) {
 	var (
 		err error
 
-		playerInfo = &PlayerInfo{}
-		requestURL *url.URL
-		request    *http.Request
-		response   *http.Response
+		playerAccount = &PlayerAccount{}
+		requestURL    *url.URL
+		request       *http.Request
+		response      *http.Response
 	)
 
 	if requestURL, err = getter.getRequestURL(playerID); err != nil {
@@ -69,17 +69,17 @@ func (getter *defaultGetter) Get(playerID int, ctx context.Context) (*PlayerInfo
 
 	defer response.Body.Close()
 
-	if err = json.NewDecoder(response.Body).Decode(&playerInfo); err != nil {
+	if err = json.NewDecoder(response.Body).Decode(&playerAccount); err != nil {
 		return nil, err
 	}
 
-	return playerInfo, nil
+	return playerAccount, nil
 }
 
 func (getter *defaultGetter) getRequestURL(playerID int) (*url.URL, error) {
 	var (
 		err        error
-		endpoint   = fmt.Sprintf("%s/api/%s/PlayerInfo/%d", getter.baseClient.Config.Host, getter.baseClient.Config.APIVersion, playerID)
+		endpoint   = fmt.Sprintf("%s/api/%s/PlayerInfo/%d/Accounts", getter.baseClient.Config.Host, getter.baseClient.Config.APIVersion, playerID)
 		requestURL *url.URL
 	)
 
