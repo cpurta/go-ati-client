@@ -19,11 +19,12 @@ import (
 	"net/http"
 
 	"github.com/cpurta/go-ati-client/config"
+	"golang.org/x/oauth2"
 )
 
-func NewClient(config *config.Config, httpClient *http.Client) *Client {
+func NewClient(config *config.Config, httpClient *http.Client, token *oauth2.Token) *Client {
 	return &Client{
-		Getter: NewGetter(config, httpClient),
+		Getter: NewGetter(config, httpClient, token),
 	}
 }
 

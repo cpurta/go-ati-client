@@ -24,14 +24,16 @@ import (
 
 	"github.com/cpurta/go-ati-client/config"
 	"github.com/cpurta/go-ati-client/util"
+	"golang.org/x/oauth2"
 )
 
-func NewGetter(config *config.Config, httpClient *http.Client) Getter {
+func NewGetter(config *config.Config, httpClient *http.Client, token *oauth2.Token) Getter {
 	return &defaultGetter{
 		baseClient: &util.BaseClient{
 			Config:     config,
 			HTTPClient: httpClient,
 		},
+		token: token,
 	}
 }
 
@@ -43,6 +45,7 @@ var _ Getter = &defaultGetter{}
 
 type defaultGetter struct {
 	baseClient *util.BaseClient
+	token      *oauth2.Token
 }
 
 func (getter *defaultGetter) Get(playerID int, ctx context.Context) (*PlayerAccount, error) {
@@ -62,6 +65,8 @@ func (getter *defaultGetter) Get(playerID int, ctx context.Context) (*PlayerAcco
 	if request, err = http.NewRequest(http.MethodGet, requestURL.String(), nil); err != nil {
 		return nil, err
 	}
+
+	request.Header.Set("Authorization", "Bearer "+getter.token.AccessToken)
 
 	if response, err = getter.baseClient.HTTPClient.Do(request); err != nil {
 		return nil, err

@@ -1,0 +1,21 @@
+{
+  "PlayerID": "117772",
+  "PlayerProfile": {
+    "FirstName": "Marketing12",
+    "LastName1": "Test",
+    "PreferredName": "Marketing12",
+    "FullName": "Marketing12 Test",
+    "PlayerRank": "0",
+    "RankName": "Rock Star",
+    "BirthDate": "1950-09-12T00:00:00",
+    "GenderType": "U",
+    "PlayerProperty": "0",
+    "JunketRepId": "0",
+    "RegisteredDateTime": "2014-07-31T00:00:00",
+    "RegisteredEmployee": "7",
+    "PlayerActive": true,
+    "GUID": "87AC757E39DF434B917397C242081689",
+    "ExternalSystemId": null,
+    "SourceCode": "VET"
+  }
+}

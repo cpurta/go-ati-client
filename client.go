@@ -21,14 +21,15 @@ import (
 	"github.com/cpurta/go-ati-client/config"
 	"github.com/cpurta/go-ati-client/playerinfo"
 	"github.com/cpurta/go-ati-client/propertyinfo"
+	"golang.org/x/oauth2"
 )
 
 // NewClient returns an ATI client that allows for access to all sublcients that
 // access an individueal resources provided by the ATI REST service.
-func NewClient(config *config.Config, httpClient *http.Client) *Client {
+func NewClient(config *config.Config, httpClient *http.Client, token *oauth2.Token) *Client {
 	return &Client{
 		PropertyInfoClient: propertyinfo.NewClient(config, httpClient),
-		PlayerInfoClient:   playerinfo.NewClient(config, httpClient),
+		PlayerInfoClient:   playerinfo.NewClient(config, httpClient, token),
 	}
 }
 

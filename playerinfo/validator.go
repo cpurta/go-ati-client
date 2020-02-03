@@ -27,16 +27,18 @@ import (
 
 	"github.com/cpurta/go-ati-client/config"
 	"github.com/cpurta/go-ati-client/util"
+	"golang.org/x/oauth2"
 )
 
 // NewValidator returns an interface that is able to validate a player and their
 // PIN by sending a POST request to the PlayerInfo resource of the ATI REST service.
-func NewValidator(config *config.Config, httpClient *http.Client) Validator {
+func NewValidator(config *config.Config, httpClient *http.Client, token *oauth2.Token) Validator {
 	return &defaultValidator{
 		baseClient: &util.BaseClient{
 			Config:     config,
 			HTTPClient: httpClient,
 		},
+		token: token,
 	}
 }
 
@@ -49,6 +51,7 @@ type Validator interface {
 
 type defaultValidator struct {
 	baseClient *util.BaseClient
+	token      *oauth2.Token
 }
 
 type validatePlayerPIN struct {
@@ -105,6 +108,8 @@ func (validator *defaultValidator) Validate(playerID int, pin string, ctx contex
 	}
 
 	request = request.WithContext(ctx)
+
+	request.Header.Set("Authorization", "Bearer "+validator.token.AccessToken)
 
 	if response, err = validator.baseClient.HTTPClient.Do(request); err != nil {
 		return err

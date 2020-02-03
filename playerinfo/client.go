@@ -19,13 +19,14 @@ import (
 	"net/http"
 
 	"github.com/cpurta/go-ati-client/config"
+	"golang.org/x/oauth2"
 )
 
 // NewClient returns a client that has access to player infomation.
-func NewClient(config *config.Config, httpClient *http.Client) *Client {
+func NewClient(config *config.Config, httpClient *http.Client, token *oauth2.Token) *Client {
 	return &Client{
-		Validator: NewValidator(config, httpClient),
-		Getter:    NewGetter(config, httpClient),
+		Validator: NewValidator(config, httpClient, token),
+		Getter:    NewGetter(config, httpClient, token),
 	}
 }
 

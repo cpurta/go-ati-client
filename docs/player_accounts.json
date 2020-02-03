@@ -1,0 +1,60 @@
+[
+  {
+    "PlayerAccount": [
+      {
+        "AccountId": "224507",
+        "AccountName": "Points",
+        "AccountType": "1",
+        "ExpirationDays": 0,
+        "AccountActiveField": true,
+        "AccountOwnership": true
+      },
+      {
+        "AccountId": "327965",
+        "AccountName": "Comps",
+        "AccountType": "2",
+        "ExpirationDays": 0,
+        "AccountActiveField": true,
+        "AccountOwnership": true
+      },
+      {
+        "AccountId": "431423",
+        "AccountName": "Cash",
+        "AccountType": "3",
+        "ExpirationDays": 0,
+        "AccountActiveField": true,
+        "AccountOwnership": true
+      },
+      {
+        "AccountId": "534881",
+        "AccountName": "Promo",
+        "AccountType": "4",
+        "ExpirationDays": 0,
+        "AccountActiveField": true,
+        "AccountOwnership": true
+      }
+    ],
+    "PlayerBalance": [
+      {
+        "AccountId": "224507",
+        "AccountFrozenDate": null,
+        "AccountBalance": 1300
+      },
+      {
+        "AccountId": "327965",
+        "AccountFrozenDate": null,
+        "AccountBalance": 0
+      },
+      {
+        "AccountId": "431423",
+        "AccountFrozenDate": null,
+        "AccountBalance": 0
+      },
+      {
+        "AccountId": "534881",
+        "AccountFrozenDate": null,
+        "AccountBalance": 550
+      }
+    ]
+  }
+]
