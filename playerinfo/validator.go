@@ -18,6 +18,7 @@ package playerinfo
 import (
 	"context"
 	"crypto/sha1"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -94,7 +95,7 @@ func (validator *defaultValidator) Validate(playerID int, pin string, ctx contex
 		PlayerID: playerID,
 		PlayerPINs: []playerPIN{
 			{
-				PinNumber: hashedPlayerPIN,
+				PinNumber: base64.StdEncoding.EncodeToString([]byte(hashedPlayerPIN)),
 			},
 		},
 	}
